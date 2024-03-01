@@ -239,6 +239,22 @@ class DisplayPanel {
     this.selectPanel(loginPage);
   }
 
+  summary() {
+    this.selectPanel(summaryPage);
+    const taskSummary = document.querySelector(".summary-lists")
+    let html=""
+    displayPanel.currentProject.tasks.forEach(e => {
+      html += `
+      <div class="task-overall-summary">
+          <div>Taskname:${e.title}</div>
+          <div>Team member:${e.teamMember}</div>
+          <div>Deadline:${e.deadLine}</div>
+        </div>
+      `
+    })
+    taskSummary.innerHTML = html;
+  }
+
   //Method to change the selected panel
   selectPanel(panelSelected) {
     const panels = document.querySelectorAll(".panel");
@@ -380,19 +396,21 @@ class KanbanBoard {
   renderTasks(column) {
     const columnElement = document.getElementById(`${column}-tasks`);
     columnElement.innerHTML = "";
-
     let taskElement = "";
+   
     this.columns[column].tasks.forEach((task) => {
+   
       taskElement += `
-      <div class="column-tasks task" draggable="true">
-        <div>
-          <div><strong>${task.title}</strong></div>
-          <div>${task.teamMember}</div>
+        <div class="column-tasks" draggable="true" style="background-color: ${task.priorityColor};">
+          <div>
+            <div><strong>${task.title}</strong></div>
+            <div>${task.teamMember}</div>
+          </div>
+          <div>${task.deadLine}</div>
         </div>
-        <div>${task.deadLine}</div>
-      </div>
       `;
     });
+   
     document.getElementById(`${column}-tasks`).innerHTML = taskElement;
   }
 }
@@ -417,7 +435,20 @@ class Task {
     this.deadLine = deadLine;
     this.priority = priority;
     this.id = Task.taskIdCounter++;
+    this.priorityColor = this.getPriorityColor(priority);
   }
+
+  getPriorityColor(priority) {
+   
+    if (priority === "High priority") {
+      return "lightpink";
+    } else if (priority === "Low priority") {
+      return "lightblue";
+    } else {
+      return "white";
+    }
+  }
+  
 }
 
 const displayPanel = new DisplayPanel();
