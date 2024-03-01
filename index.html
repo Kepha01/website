@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sdlc</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Login page -->
+    <div class="panel login-interface" id="login-panel">
+      <div class="login-username-div">
+        <h3>Username:</h3>
+        <input type="text" class="login-input" id="username-login-input" />
+      </div>
+      <div class="login-password-div">
+        <h3>Password:</h3>
+        <input type="password" class="login-input" id="password-login-input" />
+      </div>
+      <div class="login-button-div">
+        <button
+          id="login-but"
+          class="login-buttons"
+          onclick="displayPanel.userLogin()"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+    <!-- User page -->
+    <div class="panel hidden" id="user-panel">
+      <div class="user-interface">
+        <div class="welcome-user">
+          <h3 id="welcome-msg"></h3>
+          <button onclick="displayPanel.logout()">Logout</button>
+        </div>
+        <div class="user-selection">
+          <button onclick="displayPanel.startNewProject()">New project</button>
+          <div>
+            Current Projects
+            <div id="created-projects"></div>
+          </div>
+          <div>Completed Projects</div>
+        </div>
+      </div>
+    </div>
+    <!-- Admin page -->
+    <div class="panel hidden" id="admin-panel">
+      <div class="admin-page">
+        <div class="sidebar">
+          <button
+            class="remove-team-member"
+            onclick="displayPanel.currentAdmin.removeTeamMember()"
+          >
+            Remove Team Member
+          </button>
+          <div class="team-list">
+            <div class="team-mem-heading">Team members</div>
+            <div id="team-members-list"></div>
+          </div>
+          <button onclick="displayPanel.selectPanel(summaryPage)">
+            ProjectSummary
+          </button>
+          <button class="comp-but">Complete</button>
+        </div>
+        <div class="mainpage">
+          <div class="header">
+            <div id="project-title">Project Name</div>
+            <div>
+              <button onclick="displayPanel.selectPanel(addTeamMemberPage)">
+                Add team Member
+              </button>
+              <button onclick="displayPanel.backToUserPage()">Back</button>
+            </div>
+          </div>
+          <div class="kanban-board">
+            <div class="columns">
+              <div class="column" id="todo-column">
+                <div class="column-heading">
+                  <h3>To do</h3>
+                  <div class="add-task" id="todo" onclick="addNewTask(this)">
+                    +
+                  </div>
+                </div>
+                <div id="todo-tasks" class="task-container"></div>
+              </div>
+              <div class="column" id="progress-column">
+                <div class="column-heading">
+                  <h3>In progress</h3>
+                </div>
+                <div id="progress-tasks" class="task-container"></div>
+              </div>
+              <div class="column" id="done-column">
+                <div class="column-heading">
+                  <h3>Done</h3>
+                </div>
+                <div id="done-tasks" class="task-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add teamMember page -->
+    <div class="panel add-member-panel hidden" id="add-team-member-panel">
+      <div class="member-panel">
+        <div class="add-member-username">
+          <h3>Username:</h3>
+          <input
+            type="text"
+            class="add-member-input"
+            id="add-member-username-input"
+          />
+        </div>
+        <div class="add-member-email">
+          <h3>email:</h3>
+          <input
+            type="email"
+            class="add-member-input"
+            id="add-member-email-input"
+          />
+        </div>
+        <button
+          class="add-member-enter-but"
+          onclick="displayPanel.addTeamMember()"
+        >
+          Add teamMember
+        </button>
+      </div>
+    </div>
+    <!-- New Task page -->
+    <div class="panel new-task hidden" id="new-task-panel">
+      <h3 class="new-task-heading">New Task</h3>
+      <div>
+        <p>Task Name:</p>
+        <input type="text" class="new-task-input" id="task-name-input" />
+      </div>
+      <div>
+        <p>Description:</p>
+        <input type="text" class="new-task-input" id="task-desc-input" />
+      </div>
+      <div>
+        <p>Team Member:</p>
+        <select class="new-task-input" id="task-mem-input"></select>
+      </div>
+      <div>
+        <p>Deadline:</p>
+        <input type="date" class="new-task-input" id="task-deadline-input" />
+      </div>
+      <div>
+        <p>Priority:</p>
+        <select class="new-task-input" id="task-priority-input">
+          <option hidden value=""></option>
+          <option>High priority</option>
+          <option>Medium priority</option>
+          <option>Low priority</option>
+        </select>
+      </div>
+      <div class="new-task-buttons">
+        <button onclick="displayPanel.getTaskDetails()">Save</button>
+        <button onclick="displayPanel.selectPanel(adminPage)">Cancel</button>
+      </div>
+    </div>
+    <!-- View Task page -->
+    <div class="panel view-task hidden" id="view-task-panel">
+      <h3 class="view-task-heading">Task</h3>
+      <div>
+        <p>Task Name:</p>
+        <input type="text" class="view-task-input" />
+      </div>
+      <div>
+        <p>Description:</p>
+        <input type="text" class="view-task-input" />
+      </div>
+      <div>
+        <p>Team Member:</p>
+        <input type="text" class="view-task-input" />
+      </div>
+      <div>
+        <p>Deadline:</p>
+        <input type="text" class="view-task-input" />
+      </div>
+      <div>
+        <p>Priority:</p>
+        <input type="text" class="view-task-input" />
+      </div>
+      <button>Cancel</button>
+    </div>
+    <!-- Task summary -->
+    <div class="panel summary hidden" id="summary-panel">
+      <div class="summary-lists">
+        <div class="task-overall-summary">
+          <div>Taskname:</div>
+          <div>Team member:</div>
+          <div>Deadline:</div>
+        </div>
+        <div class="task-overall-summary">
+          <div>Taskname:</div>
+          <div>Team member:</div>
+          <div>Deadline:</div>
+        </div>
+        <div class="task-overall-summary">
+          <div>Taskname:</div>
+          <div>Team member:</div>
+          <div>Deadline:</div>
+        </div>
+      </div>
+      <button onclick="displayPanel.selectPanel(adminPage)">Back</button>
+    </div>
+    <!-- Member Page -->
+    <div class="panel hidden" id="member-panel">
+      <div class="member-page">
+        <div class="sidebar">
+          <div class="team-list">
+            <div class="team-mem-heading">Team members</div>
+          </div>
+          <button>ProjectSummary</button>
+        </div>
+        <div class="mainpage">
+          <div class="header">
+            <div>Project Name</div>
+            <div>
+              <button>Back</button>
+            </div>
+          </div>
+          <div class="kanban-board">
+            <div class="columns">
+              <div class="column">
+                <div class="column-heading">
+                  <h3>To do</h3>
+                </div>
+                <p class="task" draggable="true">Task1</p>
+                <p class="task" draggable="true">Task2</p>
+                <p class="task" draggable="true">Task3</p>
+              </div>
+              <div class="column">
+                <div class="column-heading">
+                  <h3>In progress</h3>
+                </div>
+                <p class="task" draggable="true">Task4</p>
+              </div>
+              <div class="column">
+                <div class="column-heading">
+                  <h3>Testing</h3>
+                </div>
+                <p class="task" draggable="true">Task5</p>
+                <p class="task" draggable="true">Task6</p>
+              </div>
+              <div class="column">
+                <div class="column-heading">
+                  <h3>Completed</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
