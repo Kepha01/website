@@ -1,0 +1,306 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Kanban board */
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.admin-page,
+.member-page {
+  display: flex;
+  border: 2px solid black;
+  margin-top: 100px;
+  height: 500px;
+  width: 700px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px 10px;
+  gap: 10px;
+
+  /* margin: 20px 0; */
+  border: 2px solid black;
+}
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: rgb(19 25 33);
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  height: 60px;
+}
+
+.columns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 10px;
+  padding: 20px 25px;
+  height: 100%;
+  overflow: scroll;
+  background-color: rgb(21 102 243 / 90%);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-shrink: 0;
+  background-color: rgb(154 151 151);
+  width: 150px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.column-heading {
+  display: flex;
+  background-color: antiquewhite;
+  padding: 10px;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.task {
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: move;
+  margin-bottom: 10px;
+}
+
+.is-dragging {
+  opacity: 0.8;
+}
+
+button {
+  background-color: rgb(255 196 0);
+  height: 40px;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.remove-team-member {
+  padding: 5px;
+}
+
+.team-list {
+  background-color: rgb(21 102 243 / 90%);
+  height: 300px;
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-mem-heading {
+  margin: 8px;
+  padding: 3px;
+  background-color: rgb(255 196 0);
+  border-radius: 15px;
+}
+
+.add-task {
+  cursor: pointer;
+}
+
+#team-members-list {
+  overflow-y: scroll;
+}
+
+.team-members {
+  background-color: white;
+  opacity: 0.5;
+  border-radius: 10px;
+  margin: 7px 8px;
+}
+
+/* Login page */
+
+.login-interface {
+  border: 1px solid lightgrey;
+  padding: 16px 25px 25px;
+  border-radius: 5px;
+  margin-top: 150px;
+}
+
+.login-input,
+.add-member-input {
+  width: 300px;
+  height: 30px;
+  margin: 10px 0 20px;
+  border-color: lightgrey;
+}
+
+.login-buttons {
+  width: 300px;
+  height: 45px;
+  margin: 10px 0 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+button:active {
+  opacity: 0.7;
+}
+
+#login-but {
+  background-color: rgb(21 39 238);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* User Panel */
+
+.user-interface {
+  border: 2px solid black;
+  width: 800px;
+  height: 500px;
+  padding: 30px;
+  margin-top: 70px;
+}
+
+.welcome-user {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+  color: white;
+  align-items: center;
+}
+
+.user-selection {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+/* Add teamMember */
+
+.add-member-input {
+  border-radius: 20px;
+  padding-left: 20px;
+}
+
+.add-member-enter-but {
+  width: 200px;
+  height: 40px;
+  margin: 10px 0 20px;
+  border-color: lightgrey;
+  background-color: white;
+}
+
+.add-member-panel {
+  margin-top: 150px;
+  width: 400px;
+  height: 300px;
+}
+
+.member-panel {
+  background-color: rgb(21 102 243 / 90%);
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* New Task Panel */
+
+.new-task,
+.view-task {
+  background-color: rgb(21 102 243 / 90%);
+  padding: 20px;
+  border: 2px black solid;
+  margin-top: 70px;
+}
+
+.new-task-input,
+.view-task-input {
+  width: 300px;
+  height: 40px;
+  margin: 10px 0 20px;
+  border-color: lightgrey;
+  background-color: white;
+  border-radius: 20px;
+  padding-left: 20px;
+}
+
+.new-task-heading {
+  margin-bottom: 20px;
+}
+
+.new-task-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Task Summary */
+
+.summary {
+  margin-top: 120px;
+  border: black 2px solid;
+  padding: 10px;
+}
+
+.summary-lists {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.task-overall-summary {
+  border: black 2px solid;
+  width: 400px;
+}
+
+/**/
+
+.project-display {
+  width: 150px;
+  background-color: rgb(135, 177, 240);
+  height: 50px;
+  cursor: pointer;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.column-tasks {
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+}
